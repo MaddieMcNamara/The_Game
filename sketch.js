@@ -1,147 +1,99 @@
-let noiseOffset = 0.0;
-let strokeWidth = 5;
+'use strict';
 
-let array = [];
-let backgroundColor = 200;
+
+let state = 'title';
+let cnv;
+let points = 0;
+let w = 600;
+let h = 600;
+
 
 
 function setup() {
-  createCanvas(700, 700);
-  // background(backgroundColor);
+cnv = createCanvas(w, h);
 
-  drawGrid();
-
-
+textFont('monospace');
 
 }
-
-
 
 function draw() {
-push();
-  textSize(32);
-  text('1', 100, 30);
-  fill(10);
-pop();
-
-  circle(175, 700, 20);
-  circle(175, 600, 20);
-  circle(175, 500, 20);
-  circle(175, 400, 20);
-  circle(175, 300, 20);
-  circle(175, 200, 20);
-
-  rect(220, 350, 15, 25);
-  rect(260, 355, 10, 20);
-
-  line(280, 480, 275, 480);
-
-//LR UPDOWN
-  circle(230, 200, 20);
-  circle(230, 300, 20);
-  circle(270, 285, 20);
-  circle(270, 220, 20);
-  circle(300, 220, 20);
-circle(301, 285, 20);
-circle(301, 400, 20);
-circle(360, 400, 20);
-circle(360, 500, 20);
-circle(301, 500, 20);
-circle(301, 600, 20);
-circle(301, 700, 20);
 
 
+switch (state) {
+ case 'title':
+ title();
+cnv.mouseClicked(titleMouseClicked);
+break;
+case 'level 1':
+level1();
+cnv.mouseClicked(level1MouseClicked);
+break;
+case 'you win':
+youWin();
+cnv.mouseClicked(youWinMouseClicked);
+break;
+default:
+break;
+}
+
+}
 
 
-
-
-
-
-
-
-  background(220, 50, 133, 5);
-  strokeWeight(strokeWidth);
-  noFill();
-
-  // noiseOffset += + 0.05;
-  // strokeWidth = noise(noiseOffset) * 100;
-
-if (mouseIsPressed){
-  // These create fade to black
-  // backgroundColor -= 5;
-  // background(backgroundColor);
-
-// stroke(map(mouseX, 0, 600, 0, 255, true), map(mouseX, 0, 600, 0, 255, true))
+// function mousePressed(){
+// state = 'level 1';
 //
-// line(width - mouseX, height - mouseY, width - pmouseX, height - pmouseY);
-//
-line(mouseX, mouseY, pmouseX, pmouseY);
-
-//connects each drawn line
-// array.push([mouseX, mouseY]);
-//
-// beginShape();
-// for(let i = 0; i < array.length - 1; i++){
-//
-// curveVertex(array[i][0], array[i][1])
 // }
-// endShape();
+function title(){
+background(0);
+textSize(80);
+fill(255);
+textAlign(CENTER);
+text('The Game', w/2, h/5);
+
+textSize(30);
+text('click anywhere to start', w/2, h/2);
 
 }
-}
-function keyTyped() {
-  if (key === 's') {
-    //save image
-    saveCanvas('fileName', 'jpg');
 
-} else if (key === 'd') {
-
-  // clear();
-  beginShape();
-  for(let i = 0; i < array.length; i++){
-
-curveVertex(array[i][0], array[i][1])
-}
-endShape();
-  //display image
-
-} else if (key === 'c') {
-  background(backgroundColor);
-  array = [];
-
-
+function titleMouseClicked() {
+  console.log('canvas is clicked on title page');
+state = 'level 1'
 
 }
 
 
-return false;
+function level1() {
+background(50, 150, 200);
+text('click for points', w/2, h - 30);
 
 }
-function drawGrid(){
-  numCells = 20;
-  fillColor = 255;
-  strokeWeight(3);
 
-  for (let i = 0; i <= width; i += width / numCells){
-    for (let j = 0; j <= height; j += height / numCells){
 
-      if (fillColor === 255){
-fillColor = 200;
-} else {
-fillColor = 255;
+function level1MouseClicked() {
+  points++;
+console.log('points = ' + points);
 
+if (points >= 10){
+ state = 'you win';
 
 }
-fill(fillColor);
-  rect(i, j, width / numCells, height / numCells);
-
-    }
-
-
-
-
-
 
 }
+
+function youWin(){
+
+  background(255, 50, 80);
+  textSize(80);
+  stroke(255);
+  text('YOU WIN', w/2, h/2);
+
+  textSize(30);
+  text('click anywhere to restart', w/2, h * 3/4);
+
+}
+
+function youWinMouseClicked (){
+state = 'level 1';
+points = 0;
 
 }

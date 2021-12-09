@@ -18,6 +18,6 @@ canvas {
   left: 0;
   position: absolute;
   z-index: -1; */
-  display: block;
-  border: 5px solid black;
+  /* display: block;
+  border: 5px solid black; */
 }
