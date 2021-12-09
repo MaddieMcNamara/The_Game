@@ -4,8 +4,8 @@
 let state = 'title';
 let cnv;
 let points = 0;
-let w = 600;
-let h = 600;
+let w = 800;
+let h = 800;
 let player;
 let coins = [];
 let rupee;
@@ -13,7 +13,7 @@ let playerImg;
 let greenImg;
 let redImg;
 let blueImg;
-let backImg;
+let backImg = []
 
 function preload(){
  playerImg = loadImage('assets/photos/link1.png')
@@ -22,10 +22,12 @@ function preload(){
  blueImg = loadImage('assets/photos/rupeeblue.png')
  backImg = loadImage('assets/photos/bg.png')
 
+
 }
 
 function setup() {
 cnv = createCanvas(w, h);
+
 imageMode(CENTER);
 rectMode(CENTER);
 
@@ -113,13 +115,17 @@ if (numberKeysPressed == 0) {
 // }
 function title(){
 background(0);
-textSize(80);
+textSize(120);
 fill(255);
 textAlign(CENTER);
-text('The Game', w/2, h/5);
+text('Rupee Drop', w/2, h/5);
+
+textSize(20);
+text('Use the arrow keys to move link around the screen and', w/2, h/2)
+text('collect as many rupees as you can for your next adventure!', w/2, h/1.8)
 
 textSize(30);
-text('click anywhere to start', w/2, h/2);
+text('click anywhere to start', w/2, h/1.1);
 
 }
 
